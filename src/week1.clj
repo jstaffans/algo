@@ -1,4 +1,4 @@
-(ns algo.core)
+(ns week1)
 
 (def ^:const base (BigInteger. "10"))
 
