@@ -1,12 +1,5 @@
 (ns week2
-  (:require [clojure.java.io :as io]))
-
-(defn ints* [filename]
-  (with-open [rdr (io/reader filename)]
-    (into [] (map #(Integer/valueOf %) (line-seq rdr)))))
-
-(def ints
-  (memoize ints*))
+  (:require [util :refer [ints]]))
 
 (defn merge-sort-and-count-inversions [coll]
   (if (= 1 (count coll))
@@ -30,8 +23,6 @@
             (recur (conj acc (first ll)) (rest ll) rr inversions)
             (recur (conj acc (first rr)) ll (rest rr) (+ inversions (count ll)))))))))
 
-(println (second (merge-sort-and-count-inversions (ints "resources/IntegerArray.txt"))))
-
-
+;; (println (second (merge-sort-and-count-inversions (ints "resources/IntegerArray.txt"))))
 
 ;; (time (merge-sort (ints "resources/IntegerArray.txt")))
