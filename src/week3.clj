@@ -4,12 +4,17 @@
 (defn pivot-first [coll]
   [(first coll) (rest coll)])
 
+(defn swap [v i1 i2]
+  (assoc v i2 (v i1) i1 (v i2)))
+
 (defn pivot-last [coll]
-  [(last coll) (take (dec (count coll)) coll)])
+  (let [pivoted-coll (swap coll 0 (- (count coll) 1))]
+    (pivot-first pivoted-coll)))
 
 (defn pivot-middle [coll]
-  (let [m (int (/ (count coll) 2))]
-    [(nth coll m) (remove nil? (assoc coll m nil))]))
+  (let [m (int (/ (count coll) 2))
+        pivoted-coll (swap coll 0 m)]
+    (pivot-first pivoted-coll)))
 
 (defn pivot-median [coll]
   (if (< (count coll) 3)
